@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title th:text="'Mi Cariñito'">Mi Cariñito</title>
+	    <link rel="icon" th:href="@{/images/logo.png}" type="image/x-icon">
+	    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+	    <link rel="stylesheet" th:href="@{/css/animate.css}">
+	    <link rel="stylesheet" th:href="@{/css/owl.carousel.css}">
+	    <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+	    <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+	    <!-- MAIN CSS -->
+	    <link rel="stylesheet" th:href="@{/css/templatemo-style.css}">
+		
+    <title>Comentarios y Calificaciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .comment-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+        }
+
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 1.5em;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star-rating :checked ~ label {
+            color: #f39c12;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #fc0;
+        }
+
+        .comment-form-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .comment-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .comment-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .comment-form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        .comment-form button:hover {
+            background-color: #45a049;
+        }
+
+        .comment-form .cancel-btn {
+            background-color: #f44336;
+        }
+
+        .comment-form .cancel-btn:hover {
+            background-color: #e53935;
+        }
+
+        .add-comment-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-comment-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function showCommentForm() {
+            document.getElementById('comment-form-container').style.display = 'flex';
+        }
+
+        function hideCommentForm() {
+            document.getElementById('comment-form-container').style.display = 'none';
+        }
+
+        function submitForm() {
+            document.getElementById('comment-form').submit();
+            hideCommentForm();
+        }
+    </script>
+</head>
+<body style="background-color: rgb(244, 242, 168);">
+
+    <!-- PRE LOADER -->
+    <section class="preloader">
+        <div class="spinner">
+            <span class="spinner-rotate"></span>
+        </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="navbar custom-navbar navbar-fixed-top" role="navigation" style="background-color: rgba(216, 59, 59, 0.836);">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                </button>
+                <!-- LOGO TEXT HERE -->
+                <a class="navbar-brand" th:href="@{/base}">
+                    <img th:src="@{/images/logo.png}" alt="Mi Cariñito" style="height: 40px;">
+                </a>
+            </div>
+            <!-- MENU LINKS -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-nav-first">
+                    <li><a th:href="@{/}" class="smoothScroll">Home</a></li>
+                    <li><a th:href="@{/platos}" class="smoothScroll">Platillos</a></li>
+                    <li><a th:href="@{/entradas}" class="smoothScroll">Entradas</a></li>
+                    <li><a th:href="@{/bebidas}" class="smoothScroll">Bebidas</a></li>
+                    <li><a th:href="@{/comentarios-calificacion}" class="smoothScroll">Comentarios</a></li>
+                    <li><a th:href="@{/contacto}" class="smoothScroll">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+	
+    <h1 style="margin-top: 10%;">Comentarios y Calificaciones</h1>
+
+   
+    <div th:each="comentario : ${comentarios}" class="comment-container">
+		<p><strong>Nombre:</strong> <span th:text="${comentario.nombre_cliente != null && !comentario.nombre_cliente.isEmpty() ? comentario.nombre_cliente : (comentario.usuario != null ? comentario.usuario.nombreUsuario : '')}"></span></p>
+        <p><strong>Comentario:</strong> <span th:text="${comentario.comentario}"></span></p>
+        <p><strong>Calificación:</strong></p>
+        <div class="star-rating">
+            <label th:each="i : ${#numbers.sequence(5, 1)}" th:style="${i <= comentario.calificacion ? 'color: #f39c12;' : 'color: #ddd;'}">&#9733;</label>
+        </div>
+        <p><strong>Fecha:</strong> <span th:text="${comentario.fecha}"></span></p>
+    </div>
+
+    <button class="add-comment-btn" onclick="showCommentForm()">+</button>
+
+    <div id="comment-form-container" class="comment-form-container">
+        <div id="comment-form" class="comment-form">
+            <h2>Enviar Nuevo Comentario y Calificación</h2>
+            <form th:action="@{/comentarios-calificacion}" th:object="${nuevoComentario}" method="post">
+                <label for="nombreCliente">Nombre:</label>
+                <input type="text" id="nombreCliente" th:field="*{nombre_cliente}" />
+                <br>
+                <label for="comentario">Comentario:</label>
+                <textarea id="comentario" th:field="*{comentario}" required></textarea>
+                <br>
+                <label for="calificacion">Calificación:</label>
+                <div class="star-rating">
+                    <input type="radio" id="star1" name="calificacion" th:field="*{calificacion}" value="1" /><label for="star1">&#9733;</label>
+                    <input type="radio" id="star2" name="calificacion" th:field="*{calificacion}" value="2" /><label for="star2">&#9733;</label>
+                    <input type="radio" id="star3" name="calificacion" th:field="*{calificacion}" value="3" /><label for="star3">&#9733;</label>
+                    <input type="radio" id="star4" name="calificacion" th:field="*{calificacion}" value="4" /><label for="star4">&#9733;</label>
+                    <input type="radio" id="star5" name="calificacion" th:field="*{calificacion}" value="5" /><label for="star5">&#9733;</label>
+                </div>
+                <br>
+                <button type="submit">Enviar</button>
+                <button type="button" class="cancel-btn" onclick="hideCommentForm()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+	    <footer id="footer" data-stellar-background-ratio="0.5" style="background-color: rgba(216, 59, 59, 0.836);">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-md-3 col-sm-8">
+	                    <div class="footer-info">
+	                        <div class="section-title">
+	                            <h2 class="wow fadeInUp" data-wow-delay="0.2s">Delivery</h2>
+	                        </div>
+	                        <address class="wow fadeInUp" data-wow-delay="0.4s">
+	                            <p>¿Antojaste algo delicioso pero no quieres salir?<br>
+									 ¡No te preocupes! Ahora ofrecemos entrega a domicilio sin costo extra.<br>
+								 <br> Pidelo ahora por WhatsApp web y en minutos te llevarán tus favoritos a tu puerta.</p>
+								 <a href="https://www.whatsapp.com/" class="fa fa-whatsapp"></a>
+	                        </address>
+	                    </div>
+	                </div>
+	                <div class="col-md-3 col-sm-8">
+	                    <div class="footer-info">
+	                        <div class="section-title">
+	                            <h2 class="wow fadeInUp" data-wow-delay="0.2s">Información</h2>
+	                        </div>
+	                        <address class="wow fadeInUp" data-wow-delay="0.4s">
+	                            <p>90765478</p>
+	                            <p><a href="mailto:micariñito@gmail.com">micariñito@gmail.com</a></p>
+	                        </address>
+	                    </div>
+	                </div>
+	                <div class="col-md-4 col-sm-8">
+	                    <div class="footer-info footer-open-hour">
+	                        <div class="section-title">
+	                            <h2 class="wow fadeInUp" data-wow-delay="0.2s">Open Hours</h2>
+	                        </div>
+	                        <div class="wow fadeInUp" data-wow-delay="0.4s">
+	                            <p>Almuerzo</p>
+	                            <div>
+	                                <strong>Lunes a Viernes</strong>
+	                                <p>12:00 PM - 3:00 PM</p>
+	                            </div>
+	                            <div>
+									<p>Cena</p>
+	                                <strong>Lunes a Viernes</strong>
+	                                <p>6:00 PM - 8:00 PM</p>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="col-md-2 col-sm-4">
+	                    <ul class="wow fadeInUp social-icon" data-wow-delay="0.4s">
+	                        <li><a href="https://web.facebook.com/?_rdc=1&_rdr" class="fa fa-facebook-square" attr="facebook icon"></a></li>
+	                        <li><a href="https://www.instagram.com/" class="fa fa-instagram"></a></li>
+	                    </ul>
+	                    <div class="wow fadeInUp copyright-text" data-wow-delay="0.8s">
+	                        <p><br>Copyright &copy; 2018 <br>MiCariñito</p>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </footer>
+
+	    <!-- SCRIPTS -->
+	    <script th:src="@{/js/jquery.js}"></script>
+	    <script th:src="@{/js/bootstrap.min.js}"></script>
+	    <script th:src="@{/js/jquery.stellar.min.js}"></script>
+	    <script th:src="@{/js/wow.min.js}"></script>
+	    <script th:src="@{/js/owl.carousel.min.js}"></script>
+	    <script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	    <script th:src="@{/js/smoothscroll.js}"></script>
+	    <script th:src="@{/js/custom.js}"></script>
+
+	</body>
+	</html>
+
+
+

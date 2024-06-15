@@ -1,0 +1,56 @@
+/* 
+ SECCION FOOTHER 
+*/
+
+#footer {
+	background-color: rgba(216, 59, 59, 0.836);
+	padding: 5px 0; /* Ajusta el padding para reducir la altura */
+	text-align: center; /* Centra el texto */
+}
+.footer-info {
+	margin-bottom: 10px; /* Ajusta el margen entre secciones */
+}
+.footer-info .section-title h2 {
+	margin-bottom: 6px;
+	font-size: 15px; /* Tamaño de fuente ajustado para los títulos */
+}
+.footer-info address p {
+	margin: 4px 0;
+	font-size: 13px; /* Tamaño de fuente ajustado para los párrafos */
+}
+.footer-info address p br {
+	display: none; /* Elimina los saltos de línea innecesarios */
+}
+.footer-info p {
+	margin: 5px 0;
+}
+.copyright-text {
+	margin-top: 10px;
+	font-size: 14px; /* Tamaño de fuente ajustado para el texto de copyright */
+}
+@media (min-width: 768px) {
+.col-md-3, .col-md-2 {
+	display: inline-block;
+	vertical-align: top;
+	float: none; /* Alinea las columnas de manera horizontal */
+	}
+	.col-md-3 {
+		width: 30%;
+	}
+	.col-md-2 {
+		width: 20%;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
